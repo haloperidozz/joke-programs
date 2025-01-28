@@ -24,8 +24,6 @@
 #define COLOR_WHITE             RGB(255, 255, 255)
 #define COLOR_BLACK             RGB(0, 0, 0)
 
-#define SE_SHUTDOWN_PRIVILEGE   19L
-
 #define IDT_BLINK_TIMER         100
 #define ID_AGREE_BUTTON         101
 #define ID_FAKE_BUTTON          102

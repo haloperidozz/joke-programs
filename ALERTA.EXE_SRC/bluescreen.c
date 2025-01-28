@@ -2,6 +2,8 @@
 
 #include "errmsgbox.h"
 
+#define SE_SHUTDOWN_PRIVILEGE   19L
+
 /* https://gitlab.winehq.org/wine/wine/-/blob/master/include/winternl.h */
 typedef enum _HARDERROR_RESPONSE_OPTION {
     OptionAbortRetryIgnore,
