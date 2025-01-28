@@ -1,12 +1,11 @@
 ##############################################################################
 
-TARGET = ALERTA
-SRC = alerta.c resource.rc
+TARGET = ALERTA.EXE
 CFLAGS = -D_UNICODE -DUNICODE -O2 -s
-LDFLAGS = -s -mwindows
+LDFLAGS = -mwindows -municode -s
 CC = gcc
 WINDRES = windres
-OBJS = alerta.o resource.o
+OBJS = $(patsubst %.c,%.o,$(wildcard *.c)) resource.o
 
 ##############################################################################
 
@@ -15,7 +14,7 @@ all: $(TARGET)
 $(TARGET): $(OBJS)
 	$(CC) -o $@ $^ $(LDFLAGS)
 
-alerta.o: alerta.c
+%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 resource.o: resource.rc

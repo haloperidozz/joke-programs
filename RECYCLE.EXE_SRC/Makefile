@@ -1,12 +1,11 @@
 ##############################################################################
 
-TARGET = RECYCLE
-SRC = recycle.c resource.rc
+TARGET = RECYCLE.EXE
 CFLAGS = -D_UNICODE -DUNICODE -O2 -s
-LDFLAGS = -lComctl32 -s -mwindows
-CC = gcc # https://www.msys2.org/
+LDFLAGS = -mwindows -municode -s -lComctl32
+CC = gcc
 WINDRES = windres
-OBJS = recycle.o resource.o
+OBJS = $(patsubst %.c,%.o,$(wildcard *.c)) resource.o
 
 ##############################################################################
 
@@ -15,7 +14,7 @@ all: $(TARGET)
 $(TARGET): $(OBJS)
 	$(CC) -o $@ $^ $(LDFLAGS)
 
-recycle.o: recycle.c
+%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 resource.o: resource.rc
