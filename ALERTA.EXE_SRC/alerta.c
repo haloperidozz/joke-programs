@@ -212,11 +212,7 @@ static HBRUSH MainWindow_OnStaticColor(PMAINWINDOW pMainWnd, HWND hCtrl,
 static VOID MainWindow_OnCommand(PMAINWINDOW pMainWnd, WPARAM wParam)
 {
     if (wParam == ID_AGREE_BUTTON) {
-#if 1
         BlueScreen(STATUS_ASSERTION_FAILURE);
-#else
-        ErrorMessageBox(TEXT("DEBUG: Blue Screen of Death"));
-#endif
     }
 }
 
