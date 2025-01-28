@@ -3,6 +3,7 @@
 #include <tchar.h>
 
 #include "bluescreen.h"
+#include "errmsgbox.h"
 
 #define MAIN_WINDOW_CLASS       TEXT("TikTok: @haloperidozz")
 #define MAIN_WINDOW_CAPTION     MAIN_WINDOW_CLASS
@@ -44,21 +45,6 @@ typedef struct tagMAINWINDOW {
     HWND hTextStatic;
     HWND hWnd;
 } MAINWINDOW, *PMAINWINDOW;
-
-static VOID ErrorMessage(LPCTSTR lpszMessage, ...)
-{
-    TCHAR szBuffer[4096];
-    va_list args;
-
-    va_start(args, lpszMessage);
-
-    _vsntprintf_s(szBuffer, sizeof(szBuffer) / sizeof(TCHAR), _TRUNCATE,
-                  lpszMessage, args);
-
-    va_end(args);
-
-    MessageBox(NULL, szBuffer, TEXT("Error"), MB_ICONERROR | MB_OK);
-}
 
 /* HACK: */
 static LRESULT CALLBACK FakeButtonSubProcedure(HWND hWnd, UINT uMsg,
@@ -231,7 +217,7 @@ static VOID MainWindow_OnCommand(PMAINWINDOW pMainWnd, WPARAM wParam)
 #if 1
         BlueScreen(STATUS_ASSERTION_FAILURE);
 #else
-        ErrorMessage(TEXT("DEBUG: Blue Screen of Death"));
+        ErrorMessageBox(TEXT("DEBUG: Blue Screen of Death"));
 #endif
     }
 }
@@ -262,7 +248,7 @@ static LRESULT CALLBACK MainWindowProcedure(HWND hWnd, UINT uMsg,
                              sizeof *pMainWnd);
         
         if (pMainWnd == NULL) {
-            ErrorMessage(TEXT("Failed to allocate memory for pMainWnd"));
+            ErrorMessageBox(TEXT("Failed to allocate memory for pMainWnd"));
             PostQuitMessage(0);
             return 0;
         }
@@ -330,7 +316,7 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
     MSG msg;
 
     if (RegisterMainWindowClass(hInstance) == 0) {
-        ErrorMessage(TEXT("Failed to register window class"));
+        ErrorMessageBox(TEXT("Failed to register window class"));
         return 0;
     }
 
@@ -342,7 +328,7 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
                           NULL, NULL, hInstance, NULL);
 
     if (hWnd == NULL) {
-        ErrorMessage(TEXT("Failed to create window class"));
+        ErrorMessageBox(TEXT("Failed to create window class"));
         return 0;
     }
 

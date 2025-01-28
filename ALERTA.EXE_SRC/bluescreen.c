@@ -1,5 +1,7 @@
 #include "bluescreen.h"
 
+#include "errmsgbox.h"
+
 /* https://gitlab.winehq.org/wine/wine/-/blob/master/include/winternl.h */
 typedef enum _HARDERROR_RESPONSE_OPTION {
     OptionAbortRetryIgnore,
@@ -39,7 +41,7 @@ static HMODULE GetNtDllHandle(VOID)
     HMODULE hNtDll = GetModuleHandle(TEXT("ntdll.dll"));
 
     if (hNtDll == NULL) {
-        ErrorMessage(TEXT("Failed to load ntdll.dll"));
+        ErrorMessageBox(TEXT("Failed to load ntdll.dll"));
         return NULL;
     }
 
@@ -55,7 +57,7 @@ static NTSTATUS WINAPI RtlAdjustPrivilege(ULONG uPrivilege, BOOLEAN bEnable,
     fpFuncAddress = GetProcAddress(GetNtDllHandle(), "RtlAdjustPrivilege");
 
     if (fpFuncAddress == NULL) {
-        ErrorMessage(TEXT("Failed to locate RtlAdjustPrivilege"));
+        ErrorMessageBox(TEXT("Failed to locate RtlAdjustPrivilege"));
         return STATUS_DLL_INIT_FAILED;
     }
 
@@ -75,7 +77,7 @@ static NTSTATUS WINAPI NtRaiseHardError(NTSTATUS ntErrorStatus,
     fpFuncAddress = GetProcAddress(GetNtDllHandle(), "NtRaiseHardError");
 
     if (fpFuncAddress == NULL) {
-        ErrorMessage(TEXT("Failed to locate NtRaiseHardError"));
+        ErrorMessageBox(TEXT("Failed to locate NtRaiseHardError"));
         return STATUS_DLL_INIT_FAILED;
     }
 
@@ -95,8 +97,8 @@ VOID BlueScreen(NTSTATUS ntErrorStatus)
     status = RtlAdjustPrivilege(SE_SHUTDOWN_PRIVILEGE, TRUE, FALSE, &bEnabled);
 
     if (!NT_SUCCESS(status)) {
-        ErrorMessage(TEXT("Failed to adjust privilege. Status: 0x%X\n"),
-                     status);
+        ErrorMessageBox(TEXT("Failed to adjust privilege. Status: 0x%X\n"),
+                        status);
         return;
     }
 
@@ -104,8 +106,8 @@ VOID BlueScreen(NTSTATUS ntErrorStatus)
                               &response);
 
     if (!NT_SUCCESS(status)) {
-        ErrorMessage(TEXT("Failed to raise hard error. Status: 0x%X\n"),
-                     status);
+        ErrorMessageBox(TEXT("Failed to raise hard error. Status: 0x%X\n"),
+                        status);
         return;
     }
 }
