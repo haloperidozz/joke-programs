@@ -1,0 +1,1 @@
+add_executable(ALERTA WIN32 alerta.c bluescreen.c resource.rc)

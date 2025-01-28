@@ -1,0 +1,1 @@
+add_executable(MOUSEMVD WIN32 mousemvd.c resource.rc)
