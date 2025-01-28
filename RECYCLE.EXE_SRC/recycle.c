@@ -1,5 +1,3 @@
-/* WTFPL 2.0 / Copyright (C) 2024 haloperidozz (TikTok: @haloperidozz) */
-
 #include <windows.h>
 #include <commctrl.h>
 #include <tchar.h>
