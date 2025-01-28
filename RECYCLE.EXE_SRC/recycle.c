@@ -358,8 +358,8 @@ static VOID MovePointTowards(LPPOINT lpptCurrent, POINT ptTarget)
  * Main
  ***********************************************************************/
 
-int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
-                   LPSTR lpCmdLine, int nCmdShow)
+int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
+                     LPTSTR lpCmdLine, int nCmdShow)
 {
     POINT ptItem, ptRecycleBin;
     PLVITEMMOVECONTEXT pContext;

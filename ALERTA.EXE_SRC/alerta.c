@@ -431,8 +431,8 @@ static ATOM RegisterMainWindowClass(HINSTANCE hInstance)
     return RegisterClassEx(&wClass);
 }
 
-int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
-                   LPSTR lpCmdLine, int nCmdShow)
+int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
+                     LPTSTR lpCmdLine, int nCmdShow)
 {
     HWND hWnd;
     MSG msg;
