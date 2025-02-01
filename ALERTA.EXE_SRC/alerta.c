@@ -3,28 +3,21 @@
 #include <tchar.h>
 
 #include "bluescreen.h"
+
 #include "errmsgbox.h"
+#include "resource.h"
 
 #define MAIN_WINDOW_CLASS       TEXT("TikTok: @haloperidozz")
-#define MAIN_WINDOW_CAPTION     MAIN_WINDOW_CLASS
 
 #define MAIN_WINDOW_WIDTH       720
 #define MAIN_WINDOW_HEIGHT      500
-
-#define CONTENT_HEADER          TEXT("ТРЕВОГА!")
-#define CONTENT_TEXT                                                    \
-    TEXT("Наши службы обнаружили, что вы собираетесь опубликовать ")    \
-    TEXT("очередной щитпост в TikTok, содержащий слова поддержки ")     \
-    TEXT("к MAP аудитории. Вы подтверждаете свои намерения?")
-
-#define AGREE_BUTTON_TEXT       TEXT("ДА")
-#define FAKE_BUTTON_TEXT        TEXT("НЕТ, БЛЯТЬ")
 
 #define COLOR_RED               RGB(255, 0, 0)
 #define COLOR_WHITE             RGB(255, 255, 255)
 #define COLOR_BLACK             RGB(0, 0, 0)
 
 #define IDT_BLINK_TIMER         100
+
 #define ID_AGREE_BUTTON         101
 #define ID_FAKE_BUTTON          102
 
@@ -74,6 +67,8 @@ static LRESULT CALLBACK FakeButtonSubProcedure(HWND hWnd, UINT uMsg,
 
 static VOID MainWindow_OnCreate(PMAINWINDOW pMainWnd)
 {
+    TCHAR szBuffer[255];
+
     pMainWnd->hbrRedBrush = CreateSolidBrush(COLOR_RED);
     pMainWnd->hbrWhiteBrush = (HBRUSH) GetStockObject(WHITE_BRUSH);
 
@@ -93,7 +88,9 @@ static VOID MainWindow_OnCreate(PMAINWINDOW pMainWnd)
                                      DEFAULT_PITCH | FF_SWISS,
                                      TEXT("Comic Sans MS"));
     
-    pMainWnd->hHeaderStatic = CreateWindow(TEXT("STATIC"), CONTENT_HEADER,
+    LoadString(NULL, IDS_HEADER, szBuffer, ARRAYSIZE(szBuffer));
+    
+    pMainWnd->hHeaderStatic = CreateWindow(TEXT("STATIC"), szBuffer,
             WS_CHILD | WS_VISIBLE | SS_NOTIFY | SS_CENTER,
             0, 20, MAIN_WINDOW_WIDTH, 100,
             pMainWnd->hWnd, NULL, NULL, NULL);
@@ -101,20 +98,26 @@ static VOID MainWindow_OnCreate(PMAINWINDOW pMainWnd)
     SendMessage(pMainWnd->hHeaderStatic, WM_SETFONT,
                 (WPARAM) pMainWnd->hHeaderFont, TRUE);
     
-    pMainWnd->hTextStatic = CreateWindow(TEXT("STATIC"), CONTENT_TEXT,
+    LoadString(NULL, IDS_TEXT, szBuffer, ARRAYSIZE(szBuffer));
+    
+    pMainWnd->hTextStatic = CreateWindow(TEXT("STATIC"), szBuffer,
             WS_CHILD | WS_VISIBLE | SS_NOTIFY | SS_CENTER,
-            40, 140, MAIN_WINDOW_WIDTH - 80, 150,
+            40, 150, MAIN_WINDOW_WIDTH - 80, 150,
             pMainWnd->hWnd, NULL, NULL, NULL);
     
     SendMessage(pMainWnd->hTextStatic, WM_SETFONT,
                 (WPARAM) pMainWnd->hTextFont, TRUE);
     
-    pMainWnd->hAgreeButton = CreateWindow(TEXT("BUTTON"), AGREE_BUTTON_TEXT,
+    LoadString(NULL, IDS_AGREE_BUTTON, szBuffer, ARRAYSIZE(szBuffer));
+    
+    pMainWnd->hAgreeButton = CreateWindow(TEXT("BUTTON"), szBuffer,
             WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,
             120, 340, 150, 50,
             pMainWnd->hWnd, (HMENU) ID_AGREE_BUTTON, NULL, NULL);
     
-    pMainWnd->hFakeButton = CreateWindow(TEXT("BUTTON"), FAKE_BUTTON_TEXT,
+    LoadString(NULL, IDS_FAKE_BUTTON, szBuffer, ARRAYSIZE(szBuffer));
+    
+    pMainWnd->hFakeButton = CreateWindow(TEXT("BUTTON"), szBuffer,
             WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON | WS_CLIPSIBLINGS,
             MAIN_WINDOW_WIDTH - 150 - 120, 340, 150, 50,
             pMainWnd->hWnd, (HMENU) ID_FAKE_BUTTON, NULL, NULL);
@@ -306,6 +309,7 @@ static ATOM RegisterMainWindowClass(HINSTANCE hInstance)
 int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
                      LPTSTR lpCmdLine, int nCmdShow)
 {
+    TCHAR szBuffer[255];
     HWND hWnd;
     MSG msg;
 
@@ -314,8 +318,10 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
         return 0;
     }
 
+    LoadString(NULL, IDS_WINDOW_CAPTION, szBuffer, ARRAYSIZE(szBuffer));
+
     hWnd = CreateWindowEx(WS_EX_COMPOSITED | WS_EX_TOPMOST,
-                          MAIN_WINDOW_CLASS, MAIN_WINDOW_CAPTION,
+                          MAIN_WINDOW_CLASS, szBuffer,
                           WS_OVERLAPPED | WS_CAPTION | WS_CLIPCHILDREN,
                           CW_USEDEFAULT, CW_USEDEFAULT,
                           MAIN_WINDOW_WIDTH, MAIN_WINDOW_HEIGHT,

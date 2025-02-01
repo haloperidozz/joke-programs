@@ -1,6 +1,17 @@
 #include <windows.h>
 
+#include "resource.h"
+
 HALOPERIDOZZ    ICON DISCARDABLE    "../haloperidozz.ico"
+
+STRINGTABLE
+BEGIN
+    IDS_WINDOW_CAPTION, "TikTok: @haloperidozz"
+    IDS_HEADER,         "ALERT"
+    IDS_TEXT,           "Are you an idiot?"
+    IDS_AGREE_BUTTON,   "Yes"
+    IDS_FAKE_BUTTON,    "No"
+END
 
 VS_VERSION_INFO VERSIONINFO
 FILEVERSION     1,0,0,0
