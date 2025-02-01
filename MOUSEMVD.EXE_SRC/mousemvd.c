@@ -3,17 +3,9 @@
 #include <tchar.h>
 #include <stdio.h>
 
-#if !defined(_UNICODE) && !defined(UNICODE)
-#error "Please define _UNICODE and UNICODE in your project settings."
-#endif
+#include "resource.h"
 
-#define MESSAGE TEXT("Мышь была передвинута.\n\n")                  \
-                TEXT("%WINDOWS_SHORT% должна быть перезагружена,")  \
-                TEXT(" чтобы изменения вступили в силу.")
-
-#define CAPTION TEXT("%WINDOWS_GENERIC%")
-
-#define UM_MOUSEMOVE WM_USER + 1
+#define UM_MOUSEMOVE (WM_USER + 1)
 
 typedef PWSTR (WINAPI *BrandingFormatString_t)(PCWSTR pstrFormat);
 
@@ -69,8 +61,14 @@ static BOOL EnablePrivilege(LPCTSTR lpszPrivilege)
 
 static DWORD WINAPI MouseMovedThread(LPVOID lpParam) 
 { 
-    PWSTR pszFormatedMessage = BrandingFormatString(MESSAGE);
-    PWSTR pszFormatedCaption = BrandingFormatString(CAPTION);
+    TCHAR szBuffer[255];
+    PWSTR pszFormatedMessage, pszFormatedCaption;
+
+    LoadString(NULL, IDS_DIALOG_CAPTION, szBuffer, ARRAYSIZE(szBuffer));
+    pszFormatedCaption = BrandingFormatString(szBuffer);
+
+    LoadString(NULL, IDS_DIALOG_MESSAGE, szBuffer, ARRAYSIZE(szBuffer));
+    pszFormatedMessage = BrandingFormatString(szBuffer);
 
     MessageBox(
         NULL, pszFormatedMessage, pszFormatedCaption,
