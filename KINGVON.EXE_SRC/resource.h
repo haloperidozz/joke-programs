@@ -1,0 +1,1 @@
+#define IDR_KING_VON_MP4 101
