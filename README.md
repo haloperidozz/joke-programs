@@ -1,25 +1,39 @@
-# [ALERTA.EXE](ALERTA.EXE_SRC/)
-![](README_SRC/alerta.png)
+## ALERTA.EXE
 
-Creates a pop-up window with a message and two buttons, which can be customized for various purposes by modifying the source code and recompiling the project. One of the buttons cannot be clicked as it continuously "escapes" from the cursor, while the other triggers a Blue Screen of Death (BSOD). Inspired by [Trojan.Win32.Alerta](https://www.youtube.com/watch?v=Vzf5sEOvNSc).
+|              |                                                                                                                                                                                                                                                                                                                                                                                           |
+| :----------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Name:        | ALERTA.EXE                                                                                                                                                                                                                                                                                                                                                                                |
+| Description: | Creates a pop-up window with a message and two buttons, which can be customized for various purposes by modifying the source code and recompiling the project. One of the buttons cannot be clicked as it continuously "escapes" from the cursor, while the other triggers a Blue Screen of Death (BSOD). Inspired by [Trojan.Win32.Alerta](https://www.youtube.com/watch?v=Vzf5sEOvNSc). |
+| Screenshot:  | ![](README_SRC/alerta.png)                                                                                                                                                                                                                                                                                                                                                                |
+| Source Code: | [ALERTA.EXE_SRC/](ALERTA.EXE_SRC/)                                                                                                                                                                                                                                                                                                                                                        |
+|              |                                                                                                                                                                                                                                                                                                                                                                                           |
 
-# [MOUSEMVD.EXE](MOUSEMVD.EXE_SRC/)
-![](README_SRC/mousemvd.png)
+## MOUSEMVD.EXE
 
-Prevents the mouse from being moved and displays a dialog box with the following message:
+|              |                                                                                                                                                                                                          |
+| :----------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Name:        | MOUSEMVD.EXE                                                                                                                                                                                             |
+| Description: | Prevents the mouse from being moved and displays a dialog box. Pressing the "OK" button (e.g., via the Enter key) will force a system reboot. The program starts with a 30-second delay after execution. |
+| Screenshot:  | ![](README_SRC/mousemvd.png)                                                                                                                                                                             |
+| Source Code: | [MOUSEMVD.EXE_SRC/](MOUSEMVD.EXE_SRC/)                                                                                                                                                                   |
+|              |                                                                                                                                                                                                          |
 
-> The mouse has been moved.
->
-> Windows <11/10/...> must be restarted for the changes to take effect.
+## RECYCLE.EXE
 
-Pressing the "OK" button (e.g., via the Enter key) will force a system reboot. The program starts with a 30-second delay after execution.
+|              |                                                           |
+| :----------- | :-------------------------------------------------------- |
+| Name:        | RECYCLE.EXE                                               |
+| Description: | Gradually moves all desktop icons toward the Recycle Bin. |
+| Screenshot:  | ![](README_SRC/recycle.gif)                               |
+| Source Code: | [RECYCLE.EXE_SRC/](RECYCLE.EXE_SRC/)                      |
+|              |                                                           |
 
-# [RECYCLE.EXE](RECYCLE.EXE_SRC/)
-![](README_SRC/recycle.gif)
+## KINGVON.EXE
 
-Gradually moves all desktop icons toward the Recycle Bin.
-
-# [KINGVON.EXE](KINGVON.EXE_SRC/)
-![](README_SRC/kingvon.png)
-
-[King Von Anti-Piracy Screen](https://www.tiktok.com/discover/king-von-anti-piracy). Opens a full screen window and plays the video. The window cannot be closed using keyboard shortcuts such as ALT+F4 etc.
+|              |                                                                                                                                                                                                               |
+| :----------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Name:        | KINGVON.EXE                                                                                                                                                                                                   |
+| Description: | [King Von Anti-Piracy Screen](https://www.tiktok.com/discover/king-von-anti-piracy). Opens a full screen window and plays the video. The window cannot be closed using keyboard shortcuts such as ALT+F4 etc. |
+| Screenshot:  | ![](README_SRC/kingvon.png)                                                                                                                                                                                   |
+| Source Code: | [KINGVON.EXE_SRC/](KINGVON.EXE_SRC/)                                                                                                                                                                          |
+|              |                                                                                                                                                                                                               |
