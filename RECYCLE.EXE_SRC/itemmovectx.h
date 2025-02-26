@@ -37,4 +37,22 @@ BOOL LvItemMoveContext_GetItem(PLVITEMMOVECONTEXT pContext, LPLVITEM lplvi);
 
 INT LvItemMoveContext_GetItemCount(PLVITEMMOVECONTEXT pContext);
 
+VOID LvItemMoveContext_SetExtendedListViewStyle(
+    PLVITEMMOVECONTEXT pContext,
+    DWORD dwStyle
+);
+
+DWORD LvItemMoveContext_GetExtendedListViewStyle(PLVITEMMOVECONTEXT pContext);
+
+static inline VOID LvItemMoveContext_DisableSnapToGrid(
+    PLVITEMMOVECONTEXT pContext
+) {
+    DWORD dwStyle;
+
+    dwStyle = LvItemMoveContext_GetExtendedListViewStyle(pContext);
+    dwStyle &= ~LVS_EX_SNAPTOGRID;
+    
+    LvItemMoveContext_SetExtendedListViewStyle(pContext, dwStyle);
+}
+
 #endif /* __ITEMMOVECTX_H */

@@ -127,6 +127,8 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
     }
 
     while (TRUE) {
+        LvItemMoveContext_DisableSnapToGrid(pContext);
+        
         iCount = LvItemMoveContext_GetItemCount(pContext);
         iRecycleBin = GetRecycleBinIndex(pContext);
 

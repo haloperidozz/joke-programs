@@ -239,3 +239,29 @@ INT LvItemMoveContext_GetItemCount(PLVITEMMOVECONTEXT pContext)
 
     return (INT) SendMessage(pContext->hListView, LVM_GETITEMCOUNT, 0, 0);
 }
+
+VOID LvItemMoveContext_SetExtendedListViewStyle(
+    PLVITEMMOVECONTEXT pContext,
+    DWORD dwStyle
+) {
+    if (pContext == NULL) {
+        return;
+    }
+
+    SendMessage(
+        pContext->hListView,
+        LVM_SETEXTENDEDLISTVIEWSTYLE, 0, dwStyle
+    );
+}
+
+DWORD LvItemMoveContext_GetExtendedListViewStyle(PLVITEMMOVECONTEXT pContext)
+{
+    if (pContext == NULL) {
+        return 0;
+    }
+
+    return (DWORD) SendMessage(
+        pContext->hListView,
+        LVM_GETEXTENDEDLISTVIEWSTYLE, 0, 0
+    );
+}
