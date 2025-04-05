@@ -1,5 +1,4 @@
 #include <windows.h>
-#include <ntdef.h>
 #include <tchar.h>
 
 #include "bluescreen.h"

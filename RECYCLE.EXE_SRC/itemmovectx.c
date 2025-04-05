@@ -87,18 +87,18 @@ PLVITEMMOVECONTEXT LvItemMoveContext_CreateFor(HWND hListView)
     return pContext;
 }
 
-WINBOOL LvItemMoveContext_GetItemPosition(
+BOOL LvItemMoveContext_GetItemPosition(
     PLVITEMMOVECONTEXT pContext,
     INT i,
-    LPPOINT lppt
-) {
+    LPPOINT lppt)
+{
     BOOL bResult = FALSE;
 
     if (pContext == NULL || lppt == NULL) {
         return FALSE;
     }
             
-    bResult = (WINBOOL) SendMessage(
+    bResult = (BOOL) SendMessage(
         pContext->hListView, LVM_GETITEMPOSITION,
         (WPARAM) i, (LPARAM) pContext->lpptRemote
     );
@@ -113,26 +113,26 @@ WINBOOL LvItemMoveContext_GetItemPosition(
     );
 }
 
-WINBOOL LvItemMoveContext_SetItemPosition(
+BOOL LvItemMoveContext_SetItemPosition(
     PLVITEMMOVECONTEXT pContext,
     INT i,
-    INT x, INT y
-) {
+    INT x, INT y)
+{
     if (pContext == NULL) {
         return FALSE;
     }
 
-    return (WINBOOL) SendMessage(                   /* :D */
+    return (BOOL) SendMessage(                   /* :D */
         pContext->hListView, LVM_SETITEMPOSITION,
         (WPARAM) i, MAKELPARAM(x, y)
     );
 }
 
-WINBOOL LvItemMoveContext_SetItemPositionPoint(
+BOOL LvItemMoveContext_SetItemPositionPoint(
     PLVITEMMOVECONTEXT pContext,
     INT i,
-    LPPOINT lppt
-) {
+    LPPOINT lppt)
+{
     if (lppt == NULL || pContext == NULL) {
         return FALSE;
     }
@@ -189,7 +189,7 @@ BOOL LvItemMoveContext_GetItem(PLVITEMMOVECONTEXT pContext, LPLVITEM lplvi)
         goto cleanup;
     }
 
-    bResult = SendMessage(
+    bResult = (BOOL) SendMessage(
         pContext->hListView, LVM_GETITEM, 0, (LPARAM)lplviRemote
     );
 

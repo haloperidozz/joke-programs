@@ -3,7 +3,7 @@
 
 #include <Windows.h>
 
-typedef struct tagVIDEOPLAYER VIDEOPLAYER, *PVIDEOPLAYER;
+typedef struct _VIDEOPLAYER VIDEOPLAYER, *PVIDEOPLAYER;
 
 PVIDEOPLAYER VideoPlayer_FromResource(
     HWND    hOutput,

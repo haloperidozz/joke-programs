@@ -4,6 +4,12 @@
 
 #define SE_SHUTDOWN_PRIVILEGE   19L
 
+/*
+    HACK: NT_SUCCESS predefinition, since ntdef.h conflicts
+          with windows.h in MSVC
+*/
+#define NT_SUCCESS(status) (((NTSTATUS) (status)) >= 0)
+
 /* https://gitlab.winehq.org/wine/wine/-/blob/master/include/winternl.h */
 typedef enum _HARDERROR_RESPONSE_OPTION {
     OptionAbortRetryIgnore,
@@ -99,17 +105,24 @@ VOID BlueScreen(NTSTATUS ntErrorStatus)
     status = RtlAdjustPrivilege(SE_SHUTDOWN_PRIVILEGE, TRUE, FALSE, &bEnabled);
 
     if (!NT_SUCCESS(status)) {
-        ErrorMessageBox(TEXT("Failed to adjust privilege. Status: 0x%X\n"),
-                        status);
+        ErrorMessageBox(
+            TEXT("Failed to adjust privilege. Status: 0x%X\n"),
+            status);
         return;
     }
 
-    status = NtRaiseHardError(ntErrorStatus, 0, 0, NULL, OptionShutdownSystem,
-                              &response);
+    status = NtRaiseHardError(
+        ntErrorStatus,
+        0,
+        0,
+        NULL,
+        OptionShutdownSystem,
+        &response);
 
     if (!NT_SUCCESS(status)) {
-        ErrorMessageBox(TEXT("Failed to raise hard error. Status: 0x%X\n"),
-                        status);
+        ErrorMessageBox(
+            TEXT("Failed to raise hard error. Status: 0x%X\n"),
+            status);
         return;
     }
 }

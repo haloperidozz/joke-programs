@@ -55,7 +55,7 @@ MFCreateMFByteStreamOnStream(IStream *pStream, IMFByteStream **ppByteStream)
 
 /***********************************************************************/
 
-struct tagVIDEOPLAYER {
+struct _VIDEOPLAYER {
     IMFPMediaPlayer*    pPlayer;
     BOOL                bLoop;
 };
@@ -116,7 +116,6 @@ VideoPlayerCallback_OnMediaPlayerEvent(
     MFP_EVENT_HEADER*           pEventHeader)
 {
     struct _VIDEOPLAYER_CALLBACK*   pCallback;
-    PVIDEOPLAYER                    pVideoPlayer;
 
     pCallback = (struct _VIDEOPLAYER_CALLBACK*) pThis;
 

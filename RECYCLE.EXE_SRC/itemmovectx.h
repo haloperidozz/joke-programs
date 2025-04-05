@@ -15,23 +15,20 @@ VOID LvItemMoveContext_Delete(PLVITEMMOVECONTEXT pContext);
 
 PLVITEMMOVECONTEXT LvItemMoveContext_CreateFor(HWND hListView);
 
-WINBOOL LvItemMoveContext_GetItemPosition(
+BOOL LvItemMoveContext_GetItemPosition(
     PLVITEMMOVECONTEXT pContext,
     INT i,
-    LPPOINT lppt
-);
+    LPPOINT lppt);
 
-WINBOOL LvItemMoveContext_SetItemPosition(
+BOOL LvItemMoveContext_SetItemPosition(
     PLVITEMMOVECONTEXT pContext,
     INT i,
-    INT x, INT y
-);
+    INT x, INT y);
 
-WINBOOL LvItemMoveContext_SetItemPositionPoint(
+BOOL LvItemMoveContext_SetItemPositionPoint(
     PLVITEMMOVECONTEXT pContext,
     INT i,
-    LPPOINT lppt
-);
+    LPPOINT lppt);
 
 BOOL LvItemMoveContext_GetItem(PLVITEMMOVECONTEXT pContext, LPLVITEM lplvi);
 
@@ -39,14 +36,13 @@ INT LvItemMoveContext_GetItemCount(PLVITEMMOVECONTEXT pContext);
 
 VOID LvItemMoveContext_SetExtendedListViewStyle(
     PLVITEMMOVECONTEXT pContext,
-    DWORD dwStyle
-);
+    DWORD dwStyle);
 
 DWORD LvItemMoveContext_GetExtendedListViewStyle(PLVITEMMOVECONTEXT pContext);
 
-static inline VOID LvItemMoveContext_DisableSnapToGrid(
-    PLVITEMMOVECONTEXT pContext
-) {
+static inline VOID
+LvItemMoveContext_DisableSnapToGrid(PLVITEMMOVECONTEXT pContext)
+{
     DWORD dwStyle;
 
     dwStyle = LvItemMoveContext_GetExtendedListViewStyle(pContext);

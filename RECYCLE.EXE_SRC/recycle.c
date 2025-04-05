@@ -118,7 +118,6 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
     PLVITEMMOVECONTEXT pContext;
     INT iCount, i;
     INT iRecycleBin, iForDelete = -1;
-    RECT rcRecycleBin;
 
     pContext = LvItemMoveContext_CreateFor(GetDesktopListView());
 
